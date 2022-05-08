@@ -1,5 +1,5 @@
 {
-  "name": "post-up",
+  "name": "game-up",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -7,18 +7,18 @@
     "test": "jest",
     "seeds": "node seeds/index.js",
     "start": "node server.js",
-    "heroku-postbuild": "node seeds/index.js"
+    "heroku-gamebuild": "node seeds/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brian-Lets-Go/Post-Up.git"
+    "url": "git+https://github.com/Brian-Lets-Go/Game-Up.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Brian-Lets-Go/Post-Up/issues"
+    "url": "https://github.com/Brian-Lets-Go/Game-Up/issues"
   },
-  "homepage": "https://github.com/Brian-Lets-Go/Post-Up#readme",
+  "homepage": "https://github.com/Brian-Lets-Go/Game-Up#readme",
   "dependencies": {
     "array-unique": "^0.3.2",
     "bcrypt": "^5.0.1",

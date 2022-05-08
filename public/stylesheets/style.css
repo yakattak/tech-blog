@@ -16,7 +16,7 @@ body, html {
     align-content: center;
 }
 
-.post-up {
+.game-up {
     margin-left: 25px;
 }
 
@@ -212,18 +212,18 @@ textarea, input {
     color: #3486eb;
 }
 
-.post {
+.game {
     /* margin-bottom: 2%; */
     /* line-height: 150%; */
 }
 
-.post .game-title {
+.game .game-title {
     font-style: italic;
     font-size: 120%;
     font-weight: bold;
 }
 
-.post .meta {
+.game .meta {
     font-weight: lighter;
 }
 
@@ -255,7 +255,7 @@ textarea, input {
 .game-venue {
     font-size: 25px;
 }
-.posted-games {
+.gameed-games {
     margin-left: 25px;
 }
 .user-games {

@@ -30,13 +30,13 @@
 </section>
 
 <section>
-  <h2 class="posted-games">Your Posted Games</h2>
+  <h2 class="gameed-games">Your Gameed Games</h2>
   <ol class="user-games">
     <div class="row">
-    {{#each posts as |game|}}
+    {{#each games as |game|}}
     <li>
       {{> game-info game}}
-      {{!-- <a href="/dashboard/edit/{{game.id}}" class="edit-link">Edit post</a> --}}
+      {{!-- <a href="/dashboard/edit/{{game.id}}" class="edit-link">Edit game</a> --}}
     </li>
     </div>
     {{/each}}

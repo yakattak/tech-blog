@@ -21,9 +21,9 @@ router.get('/', withAuth, (req, res) => {
     })
         .then(dbGameData => {
             // console.log(dbGameData, 'dbGameData logged');
-            const posts = dbGameData.map(game => game.get({ plain: true }));
-            // console.log(posts);
-            res.render('profile', { posts, loggedIn: req.session.loggedIn });
+            const games = dbGameData.map(game => game.get({ plain: true }));
+            // console.log(games);
+            res.render('profile', { games, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);

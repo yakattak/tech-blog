@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// create our Post model
+// create our Game model
 class Game extends Model {
         static attend(body, models) {
           return models.Attend.create({
@@ -40,7 +40,7 @@ class Game extends Model {
     }
   }
 
-// create fields/columns for Post model
+// create fields/columns for Game model
 Game.init(
   {
     id: {
