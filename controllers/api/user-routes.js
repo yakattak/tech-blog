@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Player, Game } = require('../../models');
+const { User, Post } = require('../../models');
 
 // router.post('/login', (req, res) => {
 //     console.log(req.body);
@@ -13,7 +13,7 @@ const { Player, Game } = require('../../models');
 
 // get all Players
 router.get('/', (req, res) => {
-  Player.findAll({
+  User.findAll({
     attributes: { exclude: ['password'] }
   })
     .then(dbUserData => res.json(dbUserData))
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Player.findOne({
+  User.findOne({
     attributes: { exclude: ['password'] },
     where: {
       id: req.params.id
@@ -65,18 +65,18 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // expects {"username": "Lernantino", "email": "lernantino@gmail.com", "password": "password1234"}
-  Player.create({
+  User.create({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password
   })
-    .then(dbPlayerData => {
+    .then(dbUserData => {
       req.session.save(() => {
-        req.session.player_id = dbPlayerData.id;
-        req.session.username = dbPlayerData.username;
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
         req.session.loggedIn = true;
   
-        res.json(dbPlayerData);
+        res.json(dbUserData);
       });
     })
     .catch(err => {
@@ -87,7 +87,7 @@ router.post('/', (req, res) => {
 
 router.post('/login', (req, res) => {
   // expects {email: 'lernantino@gmail.com', password: 'password1234'}
-  Player.findOne({
+  User.findOne({
     where: {
       email: req.body.email
     }
@@ -105,11 +105,11 @@ router.post('/login', (req, res) => {
     }
 
     req.session.save(() => {
-      req.session.player_id = dbUserData.id;
+      req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
   
-      res.json({ Player: dbUserData, message: 'You are now logged in!' });
+      res.json({ User: dbUserData, message: 'You are now logged in!' });
     });
   });
 });

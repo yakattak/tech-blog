@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const { Game, Attend, Player } = require('../../models');
+const { Post, Like, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 const sequelize = require('../../config/connection');
 
 router.get('/', (req, res) => {
 
   console.log('hi')
-  Game.findAll()
-    .then(dbGameData => res.json(dbGameData))
+  Post.findAll()
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -18,14 +18,10 @@ router.post('/', (req, res) => {
   // expects =>   { "game_type": "Baseball", "game_date": "5/25/2022", "game_time": "19:00", "game_venue": "East Side Park", "player_id": 2 },
   console.log(req.body);
   Game.create({
-    game_title: req.body.title,
-    game_type: req.body.type,
-    game_date: req.body.date,
-    game_time: req.body.time,
-    game_venue: req.body.venue,
-    player_id: req.session.player_id,
+    post_title: req.body.title,
+    user_id: req.session.user_id
   })
-    .then(dbGameData => res.json(dbGameData))
+    .then(dbPostData => res.json(dbPostData))
     .catch(err => {
       console.log(err);
       res.status(400).json(err);
@@ -33,17 +29,17 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Game.destroy({
+  Post.destroy({
     where: {
       id: req.params.id
     }
   })
-    .then(dbGameData => {
-      if (!dbGameData) {
-        res.status(404).json({ message: 'No game found with this id!' });
+    .then(dbPostData => {
+      if (!dbPostData) {
+        res.status(404).json({ message: 'No post found with this id!' });
         return;
       }
-      res.json(dbGameData);
+      res.json(dbPostData);
     })
     .catch(err => {
       console.log(err);
@@ -52,12 +48,12 @@ router.delete('/:id', (req, res) => {
 });
 
 
-router.put('/attend', withAuth, (req, res) => {
+router.put('/like', withAuth, (req, res) => {
 
     // custom static method created in models/Game.js
-    Game.attend({...req.body, player_id: req.session.player_id}, { Game, Attend, Player })
+    Post.like({...req.body, user_id: req.session.user_id}, { Post, Like, User })
 
-      .then(updatedAttendData => res.json(updatedAttendData))
+      .then(updatedLikeData => res.json(updatedLikeData))
       .catch(err => {
         console.log(err);
         res.status(500).json(err);

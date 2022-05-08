@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Player, Game, Attend } = require('../../models');
+const { User, Post, Like } = require('../../models');
 
 // router.post('/login', (req, res) => {
 //     console.log(req.body);
@@ -14,7 +14,7 @@ const { Player, Game, Attend } = require('../../models');
 // get all Attend
 router.get('/', (req, res) => {
   Attend.findAll()
-    .then(dbAttendData => res.json(dbAttendData))
+    .then(dbLikeData => res.json(dbLikeData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);

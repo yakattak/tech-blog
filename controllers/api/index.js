@@ -4,7 +4,7 @@ const gameRoutes = require('./game-routes');
 const attendRoutes = require('./attend-routes')
 
 router.use('/users', userRoutes);
-router.use('/games', gameRoutes);
-router.use('/attend', attendRoutes);
+router.use('/posts', gameRoutes);
+router.use('/likes', attendRoutes);
 
 module.exports = router;
