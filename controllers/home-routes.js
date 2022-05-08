@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 
 router.get('/dashboard', (req, res) => {
     res.render('dashboard', {
-        player_id: req.session.player_id
+        user_id: req.session.user_id
     });
 });
 

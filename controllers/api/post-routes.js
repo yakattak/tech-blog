@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   // expects =>   { "game_type": "Baseball", "game_date": "5/25/2022", "game_time": "19:00", "game_venue": "East Side Park", "player_id": 2 },
   console.log(req.body);
-  Game.create({
+  Post.create({
     post_title: req.body.title,
     user_id: req.session.user_id
   })

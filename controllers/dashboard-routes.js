@@ -1,28 +1,25 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Game, Player, Attend } = require('../models');
+const { Post, User, Like } = require('../models');
 const withAuth = require('../utils/auth');
 
 // get all games for dashboard
 router.get('/', withAuth, (req, res) => {
-    Game.findAll({
+    Post.findAll({
         attributes: [
           'id',
-          'game_title',
-          'game_type',
-          'game_date',
-          'game_time',
-          'game_venue',
-          [sequelize.literal('(SELECT COUNT(*) FROM attend WHERE game.id = attend.game_id)'), 'attend_count']
+          'post_title',
+          'post_date'
+          [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = like.post_id)'), 'like_count']
         ]
       })
-        .then(dbGameData => {
+        .then(dbPostData => {
 
-          const game = dbGameData.map(game => game.get({ plain: true }));
+          const post = dbPostData.map(post => post.get({ plain: true }));
 
-          const sortedGames = game.sort(function(a, b) {
-            const nameA = a.game_date;
-            const nameB = b.game_date;
+          const sortedPosts = post.sort(function(a, b) {
+            const nameA = a.post_date;
+            const nameB = b.post_date;
             if (nameA < nameB) {
               return -1;
             }
@@ -33,7 +30,7 @@ router.get('/', withAuth, (req, res) => {
             // names must be equal
             return 0;
           });
-          res.render('dashboard', { game, loggedIn: true });
+          res.render('dashboard', { post, loggedIn: true });
         })
         .catch(err => {
           console.log(err);

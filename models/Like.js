@@ -1,26 +1,26 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Attend extends Model {}
+class Like extends Model {}
 
-Attend.init(
+Like.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    player_id: {
+    user_id: {
       type: DataTypes.INTEGER,
         references: {
-        model: 'player',
+        model: 'user',
         key: 'id'
       }
     },
-    game_id: {
+    post_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'game',
+        model: 'post',
         key: 'id'
       }
     }
@@ -30,8 +30,8 @@ Attend.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'attend'
+    modelName: 'like'
   }
 );
 
-module.exports = Attend;
+module.exports = Like;

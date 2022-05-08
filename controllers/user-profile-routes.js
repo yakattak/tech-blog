@@ -1,29 +1,26 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { Game, Player, Attend } = require('../models');
+const { Post, User, Like } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, (req, res) => {
-    Game.findAll({
+    Post.findAll({
         where: {
             player_id: req.session.player_id
         },
         attributes: [
             'id',
-            'game_title',
-            'game_type',
-            'game_date',
-            'game_time',
-            'game_venue',
-            [sequelize.literal('(SELECT COUNT(*) FROM attend WHERE game.id = attend.game_id)'), 'attend_count']
+            'post_title',
+            'post_date'
+            [sequelize.literal('(SELECT COUNT(*) FROM like WHERE post.id = attend.post_id)'), 'like_count']
         ],
 
     })
-        .then(dbGameData => {
+        .then(dbPostData => {
             // console.log(dbGameData, 'dbGameData logged');
-            const games = dbGameData.map(game => game.get({ plain: true }));
+            const posts = dbPostData.map(post => post.get({ plain: true }));
             // console.log(games);
-            res.render('profile', { games, loggedIn: req.session.loggedIn });
+            res.render('profile', { posts, loggedIn: req.session.loggedIn });
         })
         .catch(err => {
             console.log(err);
